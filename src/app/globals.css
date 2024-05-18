@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
+  .shadow-btn {
+    box-shadow: 8px 8px 5px 0px rgba(0, 0, 0, 0.188);
+  }
   @keyframes moveForwardSm {
     20% {
-      transform: translateX(70px) scale(0.9); /* Adjusted for sm:w-80 */
+      transform: translateX(70px) scale(0.9);
     }
     40% {
       transform: translateX(140px) scale(0.8);

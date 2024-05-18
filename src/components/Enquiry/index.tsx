@@ -1,6 +1,9 @@
 'use client';
+import { CurrencyRupee, House, Person, Phone } from '@mui/icons-material';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Input from '../Input';
+import SelectInput from '../Select';
 
 const Enquiry = () => {
   const imageSources = [
@@ -47,6 +50,7 @@ const Enquiry = () => {
             src={imageSources[currentImageIndex]}
             width={100}
             height={100}
+            loading='lazy'
             alt='changingImg'
             className='w-72 mb-10 transition-opacity duration-500'
           />
@@ -57,14 +61,16 @@ const Enquiry = () => {
             src={'images/mapIcon.svg'}
             width={100}
             height={100}
+            loading='lazy'
             alt='Line'
-            className='w-10 lg:w-16 absolute -top-5 md:-top-6 lg:-top-10 -left-4 move-map'
+            className='w-10 lg:w-16 absolute -top-7 md:-top-6 lg:-top-11 -left-4 move-map'
           />
 
           <Image
             src={'images/mapLine.svg'}
             width={500}
             height={500}
+            loading='lazy'
             alt='Line'
             className='w-72 sm:w-80 md:w-96 lg:w-[500px] '
           />
@@ -73,22 +79,22 @@ const Enquiry = () => {
 
       <div className='w-full lg:w-3/5 relative flipCard'>
         <div className='absolute lg:w-full mx-auto max-w-[800px] front side'>
-          <div className='w-full h-96'>
+          <div className='w-full h-96 '>
             <Image
               src={'images/enquireImg.svg'}
               width={800}
               height={800}
               alt='enquiry'
-              className='pt-8 w-full object-cover'
+              className='pt-8 w-full object-cover h-80 md:h-auto'
             />
           </div>
           <div className='absolute top-20 left-16 sm:top-28 sm:left-36'>
-            <h1 className='lg:text-md md:text-lg font-medium mb-2'>
+            <h1 className='text-base lg:text-md md:text-lg font-medium mb-2'>
               Click Here To
             </h1>
-            <div className='ml-14 bg-gradient-to-r from-blue-600 to-green-700 via-green-700 p-1  rounded-lg text-white'>
+            <div className='flex items-center justify-center ml-14 bg-gradient-to-r from-[#3B5998] to-[#86C421] via-[#86C421] p-1  rounded-lg text-white md:shadow-btn'>
               <button
-                className='border px-1 text-xs sm:text-base sm:px-5 md:py-1 rounded-lg'
+                className='w-full border p-2 px-4  text-sm sm:text-base sm:px-5 md:py-1 md:px-8  rounded-lg'
                 onClick={() => {
                   const flipCard = document.querySelector('.flipCard');
                   flipCard?.classList.add('rotate');
@@ -100,13 +106,64 @@ const Enquiry = () => {
           </div>
         </div>
 
-        <div className='mt-16 back side'>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            consequatur perspiciatis voluptatum nostrum dolorem? Totam, quo
-            natus deleniti porro adipisci ad eveniet veniam a laboriosam dolores
-            deserunt eligendi delectus quibusdam.
-          </p>
+        <div className='back side'>
+          <div className='lg:w-full mx-auto max-w-[800px] front-side'>
+            <div className='w-full relative'>
+              <Image
+                src={'/images/enquireFormImg.svg'}
+                width={800}
+                height={800}
+                alt='enquiry'
+                className='w-full object-cover hidden md:block'
+              />
+              <div className='md:absolute md:top-32 md:left-40 text-base md:w-6/12 mt-14 md:mt-auto'>
+                <div className='grid md:grid-cols-2 justify-center items-center gap-4'>
+                  <Input
+                    type='text'
+                    className='p-2'
+                    required
+                    placeholder='Enter Your Name*'
+                    icon={Person}
+                  />
+                  <Input
+                    type='number'
+                    className='p-2'
+                    required
+                    placeholder='Mobile Number*'
+                    icon={Phone}
+                  />
+                  <SelectInput
+                    icon={House}
+                    className=' w-full max-w-xs'
+                    defaultValue=''
+                    required
+                  >
+                    <option value='' disabled>
+                      Select Type
+                    </option>
+                    <option value='option1'>Personal Loan</option>
+                    <option value='option2'>Business Loan</option>
+                    <option value='option2'>Working Loan</option>
+                    <option value='option2'>Property Loan</option>
+                    <option value='option2'>Vehicle Loan</option>
+                    <option value='option2'>Education Loan</option>
+                  </SelectInput>
+                  <Input
+                    type='number'
+                    className='p-2'
+                    required
+                    placeholder='Required Loan Amount'
+                    icon={CurrencyRupee}
+                  />
+                </div>
+                <div className='w-full mt-6 flex justify-center'>
+                  <button className='bg-lime-500 py-1 px-4 text-lg text-white rounded font-bold tracking-widest'>
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
