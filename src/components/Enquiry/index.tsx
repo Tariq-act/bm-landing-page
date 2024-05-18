@@ -85,7 +85,7 @@ const Enquiry = () => {
               width={800}
               height={800}
               alt='enquiry'
-              className='pt-8 w-full object-cover h-80 md:h-auto'
+              className='pt-8 w-full object-cover h-96 md:h-auto'
             />
           </div>
           <div className='absolute top-20 left-16 sm:top-28 sm:left-36'>
@@ -117,7 +117,7 @@ const Enquiry = () => {
                 className='w-full object-cover hidden md:block'
               />
               <div className='md:absolute md:top-32 md:left-40 text-base md:w-6/12 mt-14 md:mt-auto'>
-                <div className='grid md:grid-cols-2 justify-center items-center gap-4'>
+                <div className='grid md:grid-cols-2 justify-center items-center gap-8'>
                   <Input
                     type='text'
                     className='p-2'

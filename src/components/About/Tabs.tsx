@@ -65,7 +65,11 @@ const Tabs = () => {
         </li>
       </ul>
       <div className='w-full mt-4'>
-        <div className={`${openTab === 1 ? 'block' : 'hidden'}`}>
+        <div
+          className={`transition-opacity duration-500 ease-in-out ${
+            openTab === 1 ? 'opacity-100' : 'opacity-0 hidden'
+          }`}
+        >
           <p>
             Our Mission is to make this cluttered financial lending market -
             Organise, Transparent & Accessible for lenders & clients creating a
@@ -78,7 +82,11 @@ const Tabs = () => {
             tailored made loan options.`}
           </p>
         </div>
-        <div className={`${openTab === 2 ? 'block' : 'hidden'}`}>
+        <div
+          className={`transition-opacity duration-500 ease-in-out ${
+            openTab === 2 ? 'opacity-100' : 'opacity-0 hidden'
+          }`}
+        >
           <p>
             {`Our Ambition is to create an ecosystem from normal salaried
             customers to top class industrialists seeking loans in a right &
@@ -90,7 +98,11 @@ const Tabs = () => {
             top banks & NBFC's`}
           </p>
         </div>
-        <div className={`${openTab === 3 ? 'block' : 'hidden'}`}>
+        <div
+          className={`transition-opacity duration-500 ease-in-out ${
+            openTab === 3 ? 'opacity-100' : 'opacity-0 hidden'
+          }`}
+        >
           <p>
             {`At Bank Master, we're not just aggregating loans; we're transforming
             the way you access financial solutions—making it smarter, faster,
@@ -102,7 +114,11 @@ const Tabs = () => {
             prosperity.
           </p>
         </div>
-        <div className={`${openTab === 4 ? 'block' : 'hidden'}`}>
+        <div
+          className={`transition-opacity duration-500 ease-in-out ${
+            openTab === 4 ? 'opacity-100' : 'opacity-0 hidden'
+          }`}
+        >
           <p className='mb-0'>
             At the heart of our Customer Value Proposition lies a commitment to
             your unique needs, delivering tailored solutions that resonate with

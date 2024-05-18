@@ -9,7 +9,7 @@ interface CountUpNumberProps {
 
 const CountUpNumber: React.FC<CountUpNumberProps> = ({
   initialValue,
-  duration = 3000,
+  duration = 1000,
 }) => {
   const [count, setCount] = useState<number>(0);
 
