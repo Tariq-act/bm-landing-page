@@ -1,5 +1,6 @@
 'use client';
 import AboutSection from '@/components/About';
+import Collaborators from '@/components/Collaborators';
 import Enquiry from '@/components/Enquiry';
 import LeadingImpact from '@/components/LeadingImpact';
 import Navbar from '@/components/Navbar';
@@ -39,6 +40,7 @@ export default function Home() {
       <LeadingImpact />
       <OurUsps />
       <OurServices />
+      <Collaborators />
       <button
         onClick={handleScrollToTop}
         className={`${
