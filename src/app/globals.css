@@ -193,3 +193,9 @@ html {
   height: 100%;
   object-fit: cover;
 }
+
+@media (max-width: 500px) {
+  .swiper-pagination {
+    margin-top: 1rem;
+  }
+}

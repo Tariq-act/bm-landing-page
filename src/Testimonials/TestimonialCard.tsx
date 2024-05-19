@@ -17,7 +17,7 @@ const TestimonialCard = ({
           <div className='btn-square bg-white border rounded-full flex items-center justify-center'>
             <FormatQuote className='text-primary' fontSize='large' />
           </div>
-          {description}
+          <p className='mt-4 text-sm md:text-lg'>{description}</p>
         </div>
 
         <div className='mt-14 flex justify-center items-center'>
@@ -32,7 +32,7 @@ const TestimonialCard = ({
           </div>
         </div>
 
-        <h4>{name}</h4>
+        <h4 className='text-base md:text-lg'>{name}</h4>
         <span>{company}</span>
       </div>
     </div>
