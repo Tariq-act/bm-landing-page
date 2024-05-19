@@ -93,3 +93,103 @@ html {
 .rotate {
   transform: rotateY(180deg);
 }
+
+.testimonial-item {
+  position: relative;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.testimonial-item .testimonial-text {
+  position: relative;
+  text-align: center;
+}
+
+.testimonial-item .testimonial-text .btn-square {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.testimonial-item .testimonial-text::before {
+  position: absolute;
+  content: '';
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 30px solid;
+  border-color: #dfe4fd transparent transparent transparent;
+}
+
+.testimonial-item .testimonial-text::after {
+  position: absolute;
+  content: '';
+  bottom: -59px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 30px solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+/* .swiper-container { */
+/* Optional: Set max-width or any other styles */
+/* } */
+
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 30px;
+}
+
+.swiper-pagination-bullet {
+  position: relative;
+  background-color: #86c421 !important; /* Change dot color */
+  width: 15px !important ; /* Change dot width */
+  height: 15px !important; /* Change dot height */
+  margin: 0 2px; /* Adjust spacing between dots */
+}
+
+.swiper-pagination-bullet::before {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  border-radius: 50%;
+  content: '';
+  width: 30px; /* Change dot width */
+  height: 30px; /* Change dot height */
+  border: 2px solid #86c421;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #2b6cb0; /* Change active dot color */
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

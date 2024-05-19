@@ -1,4 +1,5 @@
 'use client';
+import Testimonials from '@/Testimonials';
 import AboutSection from '@/components/About';
 import Collaborators from '@/components/Collaborators';
 import Enquiry from '@/components/Enquiry';
@@ -41,11 +42,12 @@ export default function Home() {
       <OurUsps />
       <OurServices />
       <Collaborators />
+      <Testimonials />
       <button
         onClick={handleScrollToTop}
         className={`${
           isSticky ? 'fixed' : 'hidden'
-        } bottom-10 right-10 p-2 md:p-3 bg-secondary text-white rounded-full transition-opacity duration-300`}
+        } bottom-10 right-10 p-2 md:p-3 bg-secondary text-white rounded-full transition-opacity duration-300 z-50`}
       >
         <ArrowUpward />
       </button>
