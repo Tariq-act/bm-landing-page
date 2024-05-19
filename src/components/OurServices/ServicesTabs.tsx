@@ -8,7 +8,7 @@ const ServicesTabs = () => {
   const [openTab, setOpenTab] = useState<number>(1);
 
   const activeClasses =
-    'border-l border-t border-r rounded-t-lg text-white bg-[#86C421] text-base lg:text-lg tracking-widest';
+    'border-l border-t border-r rounded-t-lg text-white bg-secondary text-base lg:text-lg tracking-widest';
   const inactiveClasses = 'text-primary hover:text-blue-700';
 
   const handleTabChange = (tabNumber: number) => {
@@ -34,7 +34,7 @@ const ServicesTabs = () => {
             }`}
           >
             <button
-              className={`bg-white inline-block py-2 px-4 font-semibold transition-colors ${
+              className={` inline-block py-2 px-4 font-semibold transition-colors ${
                 openTab === tab.id ? activeClasses : inactiveClasses
               }`}
             >
