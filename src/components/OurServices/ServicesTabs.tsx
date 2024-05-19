@@ -8,7 +8,7 @@ const ServicesTabs = () => {
   const [openTab, setOpenTab] = useState<number>(1);
 
   const activeClasses =
-    'border-l border-t border-r rounded-t-lg text-blue-700 bg-secondary text-white text-base lg:text-lg tracking-widest';
+    'border-l border-t border-r rounded-t-lg text-blue-700 bg-[#86C421] text-white text-base lg:text-lg tracking-widest';
   const inactiveClasses = 'text-primary hover:text-blue-700';
 
   const handleTabChange = (tabNumber: number) => {
