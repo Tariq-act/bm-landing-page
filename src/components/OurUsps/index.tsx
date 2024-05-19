@@ -18,7 +18,10 @@ const OurUsps = () => {
   };
 
   return (
-    <div className='w-full mx-auto mt-10 md:mt-32 flex flex-col lg:flex-row text-white'>
+    <div
+      id='ourUps'
+      className='w-full mx-auto mt-10 md:mt-32 flex flex-col lg:flex-row text-white'
+    >
       <div className='bg-secondary lg:w-2/5 px-5 md:px-10 text-center py-5 md:py-10'>
         <div className='flex flex-col gap-4 mb-7'>
           <h1 className='text-3xl font-bold'>Our USPS</h1>

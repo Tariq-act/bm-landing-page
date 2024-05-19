@@ -99,8 +99,8 @@ const Navbar = () => {
       >
         <div className='container mx-auto hidden md:flex items-center gap-4'>
           <Link href={'#home'}>Home</Link>
-          <Link href={'#home'}>Our Usp’s</Link>
-          <Link href={'#home'}>Our Services</Link>
+          <Link href={'#ourUps'}>Our Usp’s</Link>
+          <Link href={'#our-services'}>Our Services</Link>
           <Link href={'#home'}>Eligibility</Link>
           <Link href={'#home'}>Careers</Link>
           <Link href={'#about'}>About Us</Link>
@@ -133,13 +133,13 @@ const Navbar = () => {
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#about'}
+                href={'#ourUps'}
               >
                 Our Usp’s
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#services'}
+                href={'#our-services'}
               >
                 Services
               </Link>
@@ -157,7 +157,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#contact'}
+                href={'#about'}
               >
                 About Us
               </Link>
