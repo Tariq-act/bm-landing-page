@@ -4,7 +4,7 @@ import SocialLinks from './SocialLinks';
 
 const Footer = () => {
   return (
-    <div className='text-white'>
+    <div className='text-white' id='footer'>
       <div className='bg-[#011a41] p-4 lg:px-10'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-5 md:gap-y-10 items-start justify-center text-sm'>
           <div>

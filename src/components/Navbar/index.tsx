@@ -57,6 +57,9 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className=' w-full absolute top-0 left-0'>
@@ -101,7 +104,7 @@ const Navbar = () => {
           <Link href={'#home'}>Home</Link>
           <Link href={'#ourUps'}>Our Usp’s</Link>
           <Link href={'#our-services'}>Our Services</Link>
-          <Link href={'#home'}>Eligibility</Link>
+          <Link href={'#footer'}>Eligibility</Link>
           <Link href={'#home'}>Careers</Link>
           <Link href={'#about'}>About Us</Link>
         </div>
@@ -128,36 +131,42 @@ const Navbar = () => {
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
                 href={'#home'}
+                onClick={closeMenu}
               >
                 Home
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
                 href={'#ourUps'}
+                onClick={closeMenu}
               >
                 Our Usp’s
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
                 href={'#our-services'}
+                onClick={closeMenu}
               >
                 Services
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#contact'}
+                href={'#footer'}
+                onClick={closeMenu}
               >
                 Eligibility
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
                 href={'#contact'}
+                onClick={closeMenu}
               >
                 Careers
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
                 href={'#about'}
+                onClick={closeMenu}
               >
                 About Us
               </Link>
