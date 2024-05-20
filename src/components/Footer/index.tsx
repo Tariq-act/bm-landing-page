@@ -1,10 +1,18 @@
+'use client';
 import { KeyboardArrowRight } from '@mui/icons-material';
-import React from 'react';
+import React, { useState } from 'react';
 import SocialLinks from './SocialLinks';
+import ThankYou from '../ThankYou';
 
 const Footer = () => {
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowThankYou(true);
+  };
   return (
-    <div className='text-white' id='footer'>
+    <div className='text-white relative' id='footer'>
       <div className='bg-[#011a41] p-4 lg:px-10'>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-5 md:gap-y-10 items-start justify-center text-sm'>
           <div>
@@ -94,7 +102,10 @@ const Footer = () => {
                 placeholder='Message'
               />
               <div>
-                <button className='bg-secondary w-full md:w-auto rounded-md p-2 md:p-1 px-2 text-white'>
+                <button
+                  className='bg-secondary w-full md:w-auto rounded-md p-2 md:p-1 px-2 text-white'
+                  onClick={handleSubmit}
+                >
                   Submit
                 </button>
               </div>
@@ -113,6 +124,14 @@ const Footer = () => {
           Save countless hours of efforts & money, by getting Loan with us.
         </h2>
       </div>
+
+      {showThankYou && (
+        <ThankYou
+          type='footer'
+          show={showThankYou}
+          onClose={() => setShowThankYou(false)}
+        />
+      )}
     </div>
   );
 };
