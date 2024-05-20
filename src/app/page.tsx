@@ -1,5 +1,5 @@
 'use client';
-import Testimonials from '@/Testimonials';
+import Testimonials from '@/components/Testimonials';
 import AboutSection from '@/components/About';
 import Collaborators from '@/components/Collaborators';
 import Enquiry from '@/components/Enquiry';
@@ -9,6 +9,7 @@ import OurServices from '@/components/OurServices';
 import OurUsps from '@/components/OurUsps';
 import { ArrowUpward } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
@@ -34,7 +35,7 @@ export default function Home() {
   };
 
   return (
-    <main className='pb-64'>
+    <main>
       <Navbar />
       <Enquiry />
       <AboutSection />
@@ -43,6 +44,7 @@ export default function Home() {
       <OurServices />
       <Collaborators />
       <Testimonials />
+      <Footer />
       <button
         onClick={handleScrollToTop}
         className={`${

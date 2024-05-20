@@ -33,13 +33,13 @@ const Enquiry = () => {
   return (
     <div className='block mx-auto lg:flex w-full mt-[7.3rem] md:mt-24'>
       <div
-        className='w-full lg:w-2/5 h-screen bg-cover bg-center -z-30  px-6 sm:px-12 pt-5'
+        className='w-full lg:w-2/5 md:h-screen bg-cover bg-center -z-30  px-6 sm:px-12 pt-5'
         style={{
           backgroundImage: "url('/images/home.svg')",
           height: screenHeight,
         }}
       >
-        <h6 className='text-2xl sm:w-96 leading-9 font-medium my-10'>
+        <h6 className='text-2xl sm:w-96 leading-9 font-medium my-5 md:my-10'>
           Add <span className='text-[#3B5998]'>Power </span>
           To Your <span className='text-[#3B5998]'>Loan </span>
           Selection With Our Master Loan Eligibility Tool
@@ -116,7 +116,7 @@ const Enquiry = () => {
                 alt='enquiry'
                 className='w-full object-cover hidden md:block'
               />
-              <div className='md:absolute md:top-32 md:left-40 text-base md:w-6/12 mt-14 md:mt-auto'>
+              <div className='md:absolute md:top-32 md:left-32 text-base md:w-3/5 mt-14 md:mt-auto'>
                 <div className='grid md:grid-cols-2 justify-center items-center gap-8'>
                   <Input
                     type='text'
