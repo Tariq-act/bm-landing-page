@@ -45,6 +45,7 @@ export default function Home() {
       <Collaborators />
       <Testimonials />
       <Footer />
+
       <button
         onClick={handleScrollToTop}
         className={`${

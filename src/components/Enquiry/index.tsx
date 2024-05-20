@@ -4,8 +4,16 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Input from '../Input';
 import SelectInput from '../Select';
+import ThankYou from '@/components/ThankYou';
 
 const Enquiry = () => {
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowThankYou(true);
+  };
+
   const imageSources = [
     'images/mapImg/img1.svg',
     'images/mapImg/img2.svg',
@@ -157,7 +165,10 @@ const Enquiry = () => {
                   />
                 </div>
                 <div className='w-full mt-6 flex justify-center'>
-                  <button className='bg-lime-500 py-1 px-4 text-lg text-white rounded font-bold tracking-widest'>
+                  <button
+                    onClick={handleSubmit}
+                    className='bg-lime-500 py-1 px-4 text-lg text-white rounded font-bold tracking-widest'
+                  >
                     Submit
                   </button>
                 </div>
@@ -166,6 +177,9 @@ const Enquiry = () => {
           </div>
         </div>
       </div>
+      {showThankYou && (
+        <ThankYou show={showThankYou} onClose={() => setShowThankYou(false)} />
+      )}
     </div>
   );
 };
