@@ -15,7 +15,7 @@ const ThankYou = ({
     if (show) {
       const timer = setTimeout(() => {
         onClose();
-      }, 20000);
+      }, 5000);
       return () => clearTimeout(timer);
     }
   }, [show, onClose]);
