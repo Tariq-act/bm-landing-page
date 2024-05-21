@@ -1,18 +1,20 @@
 'use client';
 import { CurrencyRupee, House, Person, Phone } from '@mui/icons-material';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Input from '../Input';
 import SelectInput from '../Select';
 import ThankYou from '@/components/ThankYou';
+import Link from 'next/link';
 
 const Enquiry = () => {
   const [showThankYou, setShowThankYou] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowThankYou(true);
-  };
+  const [formData, setFormData] = useState({
+    name: '',
+    mobile: '',
+    loanType: '',
+    loanAmount: '',
+  });
 
   const imageSources = [
     'images/mapImg/img1.svg',
@@ -24,6 +26,74 @@ const Enquiry = () => {
 
   // State to manage the current image index
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [showRequiredFieldsAlert, setShowRequiredFieldsAlert] = useState(false);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const submitForm = () => {
+    var scriptURL =
+      'https://script.google.com/macros/s/AKfycbzZahSZlYlG8b5YdeWlunJXoJlUZyfe6SADsTiqSPVVGsHSwCEgIgtjIlHmUo513GVu/exec';
+
+    var formSubmit = new FormData();
+    formSubmit.append('name', formData.name);
+    formSubmit.append('mobile', formData.mobile);
+    formSubmit.append('loanType', formData.loanType);
+    formSubmit.append('loanAmount', formData.loanAmount);
+
+    setLoading(true);
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: formSubmit,
+      mode: 'no-cors',
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Reset the form after successful submission
+        setFormData({
+          name: '',
+          mobile: '',
+          loanType: '',
+          loanAmount: '',
+        });
+        setShowThankYou(true);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Form submission failed');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      submitForm();
+    } else {
+      setShowRequiredFieldsAlert(true);
+      setTimeout(() => {
+        setShowRequiredFieldsAlert(false);
+      }, 5000);
+    }
+  };
+
+  const validateForm = () => {
+    const mobileRegex = /^\d{10}$/;
+
+    return (
+      formData.name !== '' &&
+      formData.mobile.match(mobileRegex) && // Check if mobile matches the regex
+      formData.loanType !== '' &&
+      formData.loanAmount !== ''
+    );
+  };
 
   // Effect to change the image every 5 seconds
   useEffect(() => {
@@ -41,15 +111,21 @@ const Enquiry = () => {
   return (
     <div className='block mx-auto lg:flex w-full mt-[7.3rem] md:mt-24'>
       <div
-        className='w-full lg:w-2/5 md:h-screen bg-cover bg-center -z-30  px-6 sm:px-12 pt-5'
+        className='w-full lg:w-2/5 md:h-screen bg-cover bg-center   px-6 sm:px-12 pt-5'
         style={{
           backgroundImage: "url('/images/home.svg')",
           height: screenHeight,
         }}
       >
         <h6 className='text-2xl sm:w-96 leading-9 font-medium my-5 md:my-10'>
-          Add <span className='text-[#3B5998]'>Power </span>
-          To Your <span className='text-[#3B5998]'>Loan </span>
+          Add{' '}
+          <span className='text-[#3B5998]'>
+            <Link href={'/'}> Power </Link>
+          </span>
+          To Your{' '}
+          <span className='text-[#3B5998]'>
+            <Link href={'/'}> Loan </Link>
+          </span>
           Selection With Our Master Loan Eligibility Tool
         </h6>
 
@@ -132,6 +208,9 @@ const Enquiry = () => {
                     required
                     placeholder='Enter Your Name*'
                     icon={Person}
+                    name='name'
+                    value={formData.name}
+                    onChange={handleChange}
                   />
                   <Input
                     type='number'
@@ -139,22 +218,28 @@ const Enquiry = () => {
                     required
                     placeholder='Mobile Number*'
                     icon={Phone}
+                    name='mobile'
+                    value={formData.mobile}
+                    onChange={handleChange}
                   />
                   <SelectInput
                     icon={House}
                     className=' w-full max-w-xs'
                     defaultValue=''
                     required
+                    name='loanType'
+                    value={formData.loanType}
+                    onChange={handleChange}
                   >
                     <option value='' disabled>
                       Select Type
                     </option>
-                    <option value='option1'>Personal Loan</option>
-                    <option value='option2'>Business Loan</option>
-                    <option value='option2'>Working Loan</option>
-                    <option value='option2'>Property Loan</option>
-                    <option value='option2'>Vehicle Loan</option>
-                    <option value='option2'>Education Loan</option>
+                    <option value='Personal Loan'>Personal Loan</option>
+                    <option value='Business Loan'>Business Loan</option>
+                    <option value='Working Loan'>Working Loan</option>
+                    <option value='Property Loan'>Property Loan</option>
+                    <option value='Vehicle Loan'>Vehicle Loan</option>
+                    <option value='Education Loan'>Education Loan</option>
                   </SelectInput>
                   <Input
                     type='number'
@@ -162,14 +247,23 @@ const Enquiry = () => {
                     required
                     placeholder='Required Loan Amount'
                     icon={CurrencyRupee}
+                    name='loanAmount'
+                    value={formData.loanAmount}
+                    onChange={handleChange}
                   />
                 </div>
+                {showRequiredFieldsAlert && (
+                  <div className='text-red-500 mt-2 text-center'>
+                    Please fill out all required fields.
+                  </div>
+                )}
                 <div className='w-full mt-6 flex justify-center'>
                   <button
                     onClick={handleSubmit}
                     className='bg-lime-500 py-1 px-4 text-lg text-white rounded font-bold tracking-widest'
+                    disabled={loading}
                   >
-                    Submit
+                    {loading ? 'Loading...' : 'Submit'}
                   </button>
                 </div>
               </div>

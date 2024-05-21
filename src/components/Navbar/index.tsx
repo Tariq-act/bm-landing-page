@@ -7,20 +7,14 @@ import { useEffect, useRef, useState } from 'react';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 80) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
+      setIsSticky(window.scrollY > 80);
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -28,11 +22,9 @@ const Navbar = () => {
 
   useEffect(() => {
     if (menuRef.current) {
-      if (isOpen) {
-        menuRef.current.style.maxHeight = `${menuRef.current.scrollHeight}px`;
-      } else {
-        menuRef.current.style.maxHeight = '0px';
-      }
+      menuRef.current.style.maxHeight = isOpen
+        ? `${menuRef.current.scrollHeight}px`
+        : '0px';
     }
   }, [isOpen]);
 
@@ -55,20 +47,21 @@ const Navbar = () => {
   }, [isOpen]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
+
   const closeMenu = () => {
     setIsOpen(false);
   };
 
   return (
-    <div className=' w-full absolute top-0 left-0'>
+    <div className='w-full absolute top-0 left-0'>
       <div className='container mx-auto flex flex-col gap-2 justify-center p-2 md:p-4 md:flex-row items-center md:justify-between'>
-        <Link href={'/'}>
+        <Link href='/'>
           <div className='flex gap-2 items-center'>
-            <Image src={'images/logo.svg'} alt='logo' width={30} height={30} />
+            <Image src='/images/logo.svg' alt='logo' width={30} height={30} />
             <Image
-              src={'images/BANKMASTER.svg'}
+              src='/images/BANKMASTER.svg'
               alt='name'
               width={120}
               height={30}
@@ -77,17 +70,17 @@ const Navbar = () => {
         </Link>
         <div className='flex gap-2 text-xs sm:text-sm items-center'>
           <Link
-            href={'tel:+918886879525'}
+            href='tel:+918886879525'
             className='cursor-pointer flex items-center gap-1'
           >
-            <Call className='text-[#3B5998] text-sm md:text-lg' />{' '}
+            <Call className='text-[#3B5998] text-sm md:text-lg' />
             <span>+91 88868 79525</span>
           </Link>
           <Link
-            href={'mailto: info@bankmaster.in'}
+            href='mailto:info@bankmaster.in'
             className='cursor-pointer flex items-center gap-1'
           >
-            <Email className='text-[#3B5998] text-sm md:text-lg ' />{' '}
+            <Email className='text-[#3B5998] text-sm md:text-lg' />
             <span>Info@bankmaster.in</span>
           </Link>
         </div>
@@ -100,15 +93,45 @@ const Navbar = () => {
             : ''
         }`}
       >
-        <div className='container mx-auto hidden md:flex items-center gap-4'>
-          <Link href={'#home'}>Home</Link>
-          <Link href={'#ourUps'}>Our Usp’s</Link>
-          <Link href={'#our-services'}>Our Services</Link>
-          <Link href={'#footer'}>Eligibility</Link>
-          <Link href={'#home'}>Careers</Link>
-          <Link href={'#about'}>About Us</Link>
+        <div className='container mx-auto hidden md:flex items-center gap-6'>
+          <Link
+            href='#home'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            Home
+          </Link>
+          <Link
+            href='#ourUps'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            Our Usp’s
+          </Link>
+          <Link
+            href='#our-services'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            Our Services
+          </Link>
+          <Link
+            href='#footer'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            Eligibility
+          </Link>
+          <Link
+            href='#home'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            Careers
+          </Link>
+          <Link
+            href='#about'
+            className='hover:text-secondary transition-all hover:scale-105'
+          >
+            About Us
+          </Link>
         </div>
-        <div className=' md:hidden '>
+        <div className='md:hidden'>
           <div className='flex'>
             <div
               className='bg-white p-1 rounded shadow-sm ml-auto cursor-pointer'
@@ -121,51 +144,48 @@ const Navbar = () => {
             ref={menuRef}
             className='transition-max-height duration-300 ease-in-out overflow-hidden'
             style={{
-              maxHeight:
-                isOpen && menuRef.current
-                  ? `${menuRef.current.scrollHeight}px`
-                  : '0',
+              maxHeight: isOpen ? `${menuRef.current?.scrollHeight}px` : '0px',
             }}
           >
-            <div className='flex flex-col items-center gap-4 bg-white rounded mt-1 p-2 '>
+            <div className='flex flex-col items-center gap-4 bg-white rounded mt-1 p-2'>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#home'}
+                href='#home'
                 onClick={closeMenu}
               >
                 Home
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#ourUps'}
+                href='#ourUps'
                 onClick={closeMenu}
               >
                 Our Usp’s
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#our-services'}
+                href='#our-services'
                 onClick={closeMenu}
               >
                 Services
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#footer'}
+                href='#footer'
                 onClick={closeMenu}
               >
                 Eligibility
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#contact'}
+                href='#contact'
                 onClick={closeMenu}
               >
                 Careers
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href={'#about'}
+                href='#about'
                 onClick={closeMenu}
               >
                 About Us

@@ -2,15 +2,95 @@
 import { KeyboardArrowRight } from '@mui/icons-material';
 import React, { useState } from 'react';
 import SocialLinks from './SocialLinks';
-import ThankYou from '../ThankYou';
+import Link from 'next/link';
+
+interface FormData {
+  name: string;
+  mobile: string;
+  email: string;
+  message: string;
+}
 
 const Footer = () => {
-  const [showThankYou, setShowThankYou] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    mobile: '',
+    email: '',
+    message: '',
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowThankYou(true);
+  const [loading, setLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
+  const [showRequiredFieldsAlert, setShowRequiredFieldsAlert] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+
+    // Validate the form
+    if (!validateForm()) {
+      setShowRequiredFieldsAlert(true);
+      setTimeout(() => {
+        setShowRequiredFieldsAlert(false);
+      }, 5000); // Hide the alert after 5 seconds
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const scriptURL =
+        'https://script.google.com/macros/s/AKfycbzJ18kh_K5K5DpL3K7tIDeQXlDyh3N7o3R8DNzVPijwHJ1L5NNBLLsFAIELd2O5-riEwA/exec';
+
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        mode: 'no-cors',
+      });
+
+      const data = await response.text();
+      setSuccessMsg('Form submitted successfully');
+      setFormData({
+        name: '',
+        mobile: '',
+        email: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Form submission failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const validateForm = (): boolean => {
+    // Regular expression to match exactly 10 digits for mobile number
+    const mobileRegex = /^\d{10}$/;
+
+    // Check if mobile matches the regex
+    const isMobileValid =
+      formData.mobile !== null && formData.mobile.match(mobileRegex);
+
+    return (
+      formData.name !== '' &&
+      !!isMobileValid && // !! is used to explicitly convert isMobileValid to boolean
+      formData.email !== '' &&
+      formData.message !== ''
+    );
+  };
+
   return (
     <div className='text-white relative' id='footer'>
       <div className='bg-[#011a41] p-4 lg:px-10'>
@@ -37,22 +117,34 @@ const Footer = () => {
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Services</h4>
             <ul>
               <li>
-                <KeyboardArrowRight /> <span>Personal Loan</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Personal Loan</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Business Loan</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Business Loan</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Working capital</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Working capital</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Property Loan</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Property Loan</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Vehicle Loan</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Vehicle Loan</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Education Loan</span>
+                <Link href='#our-services'>
+                  <KeyboardArrowRight /> <span>Education Loan</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -60,54 +152,93 @@ const Footer = () => {
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Quick Links</h4>
             <ul>
               <li>
-                <KeyboardArrowRight /> <span>Home</span>
+                <Link href='#home'>
+                  <KeyboardArrowRight /> <span>Home</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Careers</span>
+                <Link href={'/careers'}>
+                  <KeyboardArrowRight /> <span>Careers</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Eligibility</span>
+                <Link href={'#footer'}>
+                  <KeyboardArrowRight /> <span>Eligibility</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Team</span>
+                <Link href={'/'}>
+                  <KeyboardArrowRight /> <span>Team</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>About Us</span>
+                <Link href={'#about'}>
+                  <KeyboardArrowRight /> <span>About Us</span>
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Contact Us</span>
+                <Link href={'#footer'}>
+                  <KeyboardArrowRight /> <span>Contact Us</span>
+                </Link>
               </li>
             </ul>
           </div>
           <div>
             <h4 className='mb-2 md:mb-4 text-lg font-bold'>Contact Us</h4>
-            <form className='flex flex-col gap-2'>
+            <form
+              className='flex flex-col gap-2'
+              id='contact-form'
+              onSubmit={handleSubmit}
+            >
               <input
                 type='text'
                 className='p-1 px-4 rounded-lg text-black'
                 placeholder='Your Name'
+                name='name'
+                value={formData.name}
+                onChange={handleChange}
+                required
               />
               <input
-                type='number'
+                type='tel'
                 className='p-1 px-4 rounded-lg text-black'
                 placeholder='Phone Number'
+                name='mobile'
+                value={formData.mobile}
+                onChange={handleChange}
+                required
               />
               <input
                 type='email'
                 className='p-1 px-4 rounded-lg text-black'
                 placeholder='Your email'
+                name='email'
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
               <textarea
                 className='p-1 px-4 rounded-lg text-black'
                 placeholder='Message'
+                name='message'
+                value={formData.message}
+                onChange={handleChange}
+                required
               />
-              <div>
+              <div className='flex items-center'>
                 <button
+                  type='submit'
                   className='bg-secondary w-full md:w-auto rounded-md p-2 md:p-1 px-2 text-white'
-                  onClick={handleSubmit}
+                  id='contact-form-button'
+                  disabled={loading}
                 >
-                  Submit
+                  {loading ? 'Loading...' : 'Submit'}
                 </button>
+                {showRequiredFieldsAlert && (
+                  <span className='text-red-500 ml-2'>
+                    Please fill out all required fields.
+                  </span>
+                )}
               </div>
             </form>
           </div>
@@ -124,14 +255,6 @@ const Footer = () => {
           Save countless hours of efforts & money, by getting Loan with us.
         </h2>
       </div>
-
-      {showThankYou && (
-        <ThankYou
-          type='footer'
-          show={showThankYou}
-          onClose={() => setShowThankYou(false)}
-        />
-      )}
     </div>
   );
 };
