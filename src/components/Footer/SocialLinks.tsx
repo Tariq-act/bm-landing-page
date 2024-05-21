@@ -48,7 +48,7 @@ const SocialLinks = () => {
         />
       </Link>
       <Link
-        href={'https://www.instagram.com/'}
+        href={'https://www.instagram.com/bankmaster_i'}
         className='w-8 h-8 sm:w-10 sm:h-10 p-2 border border-white rounded-full flex items-center justify-center cursor-pointer'
         target='_blank'
       >
