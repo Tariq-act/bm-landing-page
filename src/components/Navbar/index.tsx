@@ -119,7 +119,7 @@ const Navbar = () => {
             Eligibility
           </Link>
           <Link
-            href='#home'
+            href='/careers'
             className='hover:text-secondary transition-all hover:scale-105'
           >
             Careers
@@ -178,7 +178,7 @@ const Navbar = () => {
               </Link>
               <Link
                 className='w-full hover:bg-[#EAFCEF] px-1 rounded'
-                href='#contact'
+                href='/careers'
                 onClick={closeMenu}
               >
                 Careers

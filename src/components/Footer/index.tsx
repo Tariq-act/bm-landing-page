@@ -106,10 +106,22 @@ const Footer = () => {
 
             <ul className='text-[#dfe4fd]'>
               <li>
-                <KeyboardArrowRight /> <span>Terms & conditions</span>
+                <KeyboardArrowRight />{' '}
+                <Link
+                  href={'/terms-and-conditions'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
+                  Terms & conditions
+                </Link>
               </li>
               <li>
-                <KeyboardArrowRight /> <span>Privacy & policy</span>
+                <KeyboardArrowRight />{' '}
+                <Link
+                  href={'/privacy-policy'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
+                  Privacy & policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -117,32 +129,50 @@ const Footer = () => {
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Services</h4>
             <ul>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Personal Loan</span>
                 </Link>
               </li>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Business Loan</span>
                 </Link>
               </li>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Working capital</span>
                 </Link>
               </li>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Property Loan</span>
                 </Link>
               </li>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Vehicle Loan</span>
                 </Link>
               </li>
               <li>
-                <Link href='#our-services'>
+                <Link
+                  href='/#our-services'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Education Loan</span>
                 </Link>
               </li>
@@ -152,32 +182,50 @@ const Footer = () => {
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Quick Links</h4>
             <ul>
               <li>
-                <Link href='#home'>
+                <Link
+                  href='/#home'
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Home</span>
                 </Link>
               </li>
               <li>
-                <Link href={'/careers'}>
+                <Link
+                  href={'/careers'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Careers</span>
                 </Link>
               </li>
               <li>
-                <Link href={'#footer'}>
+                <Link
+                  href={'#footer'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Eligibility</span>
                 </Link>
               </li>
               <li>
-                <Link href={'/'}>
+                <Link
+                  href={'/'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Team</span>
                 </Link>
               </li>
               <li>
-                <Link href={'#about'}>
+                <Link
+                  href={'/#about'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>About Us</span>
                 </Link>
               </li>
               <li>
-                <Link href={'#footer'}>
+                <Link
+                  href={'#footer'}
+                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+                >
                   <KeyboardArrowRight /> <span>Contact Us</span>
                 </Link>
               </li>
