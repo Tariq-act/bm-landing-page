@@ -207,7 +207,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={'/'}
+                  href={'/#collaborators'}
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
                 >
                   <KeyboardArrowRight /> <span>Team</span>

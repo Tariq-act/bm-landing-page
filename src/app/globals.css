@@ -199,3 +199,17 @@ html {
     margin-top: 1rem;
   }
 }
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.max-h-screen {
+  max-height: calc(100vh - 400px);
+  overflow-y: auto;
+}

@@ -3,7 +3,10 @@ import CollaboratorsBanks from './CollaboratorsBanks';
 
 const Collaborators = () => {
   return (
-    <div className='flex flex-col md:flex-row text-white w-full mt-20'>
+    <div
+      className='flex flex-col md:flex-row text-white w-full mt-20'
+      id='collaborators'
+    >
       <div className='bg-primary md:w-2/5 flex flex-col gap-3 items-center justify-center text-center text-xl md:text-2xl lg:text-3xl font-semibold py-5'>
         <div>
           <h1>Our</h1>
