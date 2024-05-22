@@ -1,20 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 const OurUsps = () => {
   const [selectedFeature, setSelectedFeature] = useState<number>(0);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
-  const images = [
-    'images/feature/loanProcess.svg',
-    'images/feature/financialDoctor.svg',
-    'images/feature/tracker.svg',
-    'images/feature/driveInn.svg',
-    'images/feature/LoanEligibility.svg',
-  ];
-
+  const images = useMemo(
+    () => [
+      '/images/feature/loanProcess.svg',
+      '/images/feature/financialDoctor.svg',
+      '/images/feature/tracker.svg',
+      '/images/feature/driveInn.svg',
+      '/images/feature/LoanEligibility.svg',
+    ],
+    []
+  );
   const Info = [
     {
       name: 'Loan Process',
@@ -46,9 +48,17 @@ const OurUsps = () => {
       setTimeout(() => {
         setSelectedFeature(index);
         setIsTransitioning(false);
-      }, 500); // Transition duration should match the CSS transition duration
+      }, 500);
     }
   };
+
+  // Prefetching images to improve performance
+  useEffect(() => {
+    images.forEach((image) => {
+      const img = new window.Image();
+      img.src = image;
+    });
+  }, [images]);
 
   return (
     <div
@@ -70,55 +80,26 @@ const OurUsps = () => {
       </div>
 
       <div className='bg-primary lg:w-3/5 flex flex-col items-center justify-center md:justify-start gap-5 md:gap-32 lg:gap-32 md:px-10 py-8'>
-        <div className='flex items-center justify-center md:justify-start gap-10 md:gap-32 lg:gap-32 px-5 md:px-10 py-8'>
+        <div className='flex items-center justify-center md:justify-start gap-10 md:gap-32 lg:gap-32 px-5 md:px-10'>
           <div>
             <ul className='flex flex-col gap-2'>
-              <li
-                className={`cursor-pointer ${
-                  selectedFeature === 0 ? 'text-secondary' : ''
-                }`}
-                onClick={() => handleFeatureClick(0)}
-              >
-                Loan Process
-              </li>
-              <li
-                className={`cursor-pointer ${
-                  selectedFeature === 1 ? 'text-secondary' : ''
-                }`}
-                onClick={() => handleFeatureClick(1)}
-              >
-                Financial Doctor
-              </li>
-              <li
-                className={`cursor-pointer ${
-                  selectedFeature === 2 ? 'text-secondary' : ''
-                }`}
-                onClick={() => handleFeatureClick(2)}
-              >
-                My Tracker
-              </li>
-              <li
-                className={`cursor-pointer ${
-                  selectedFeature === 3 ? 'text-secondary' : ''
-                }`}
-                onClick={() => handleFeatureClick(3)}
-              >
-                Drive In
-              </li>
-              <li
-                className={`cursor-pointer ${
-                  selectedFeature === 4 ? 'text-secondary' : ''
-                }`}
-                onClick={() => handleFeatureClick(4)}
-              >
-                Loan Eligibility tool
-              </li>
+              {Info.map((feature, index) => (
+                <li
+                  key={index}
+                  className={`cursor-pointer ${
+                    selectedFeature === index ? 'text-secondary' : ''
+                  }`}
+                  onClick={() => handleFeatureClick(index)}
+                >
+                  {feature.name}
+                </li>
+              ))}
             </ul>
           </div>
           <div className='flex items-center gap-3'>
             <div
-              className={`transition-opacity duration-300 ${
-                isTransitioning ? 'opacity-0' : 'opacity-100'
+              className={`transition-opacity transform duration-500 ${
+                isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
               }`}
             >
               <Image
@@ -126,13 +107,13 @@ const OurUsps = () => {
                 width={160}
                 height={160}
                 loading='lazy'
-                alt='Feature Image'
+                alt={Info[selectedFeature].name}
               />
             </div>
 
             <div
-              className={`w-56 border rounded-xl p-3 hidden md:block transition-opacity duration-300 ${
-                isTransitioning ? 'opacity-0' : 'opacity-100'
+              className={`w-56 border rounded-xl p-3 hidden md:block transition-opacity transform duration-500 ${
+                isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
               }`}
             >
               <h1 className='font-semibold md:text-2xl mb-2'>
@@ -144,8 +125,8 @@ const OurUsps = () => {
         </div>
 
         <div
-          className={`md:hidden w-56 border rounded-xl p-3 transition-opacity duration-300 ${
-            isTransitioning ? 'opacity-0' : 'opacity-100'
+          className={`md:hidden w-56 border rounded-xl p-3 transition-opacity transform duration-500 ${
+            isTransitioning ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
           }`}
         >
           <h1 className='font-semibold md:text-2xl mb-2'>

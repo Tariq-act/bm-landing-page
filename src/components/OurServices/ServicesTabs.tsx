@@ -2,39 +2,126 @@
 
 import { Check } from '@mui/icons-material';
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
+const tabs = [
+  { id: 1, label: 'Personal Loan' },
+  { id: 2, label: 'Business Loan' },
+  { id: 3, label: 'Working Capital' },
+  { id: 4, label: 'Property Loan' },
+  { id: 5, label: 'Vehicle Loan' },
+  { id: 6, label: 'Education Loan' },
+];
+
+const tabContents = [
+  {
+    id: 1,
+    image: '/images/loans/personal_loan.svg',
+    title: 'Unlock Financial Freedom: Navigating the World of Personal Loans',
+    description:
+      'Experience financial freedom without collateral at Bank Master. Your ultimate guide to personal loans, navigate low interest rates, terms, and eligibility confidently. Empower your financial journey today.',
+    features: [
+      'Unsecured Loans',
+      "21 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+  {
+    id: 2,
+    image: '/images/loans/business_loan.svg',
+    title: 'Amplify Business Prosperity: Uncover the Power of Business Loans',
+    description:
+      'Seize Financial Advantage at Bank Master, Collateral-Free. Your Ultimate Business Loan Guide. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Business Journey Today.',
+    features: [
+      'Unsecured Loans',
+      "21 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+  {
+    id: 3,
+    image: '/images/loans/working_capital.svg',
+    title: 'Optimize Operations: Navigating the World of Working Capital',
+    description:
+      'Enhance Financial Agility with Bank Master. Your Comprehensive Guide to Working Capital. Navigate Terms, Interest Rates, and Eligibility with Confidence. Empower Your Business Journey Today.',
+    features: [
+      'Secured & Unsecured Loans',
+      "21 Banks & NBFC's Partners",
+      "6 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+  {
+    id: 4,
+    image: '/images/loans/property_loan.svg',
+    title:
+      'Transform Dreams into Reality: Explore the World of Property & Mortgage Loans',
+    description:
+      'Turn Your Property Dreams into Achievements with Bank Master. Your Inspirational Guide to Property & Mortgage Loans, revealing strategies to transform your aspirations into reality. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Property Journey Today.',
+    features: [
+      'Purchase & Mortgage Loans',
+      "32 Banks & NBFC's Partners",
+      "6 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+  {
+    id: 5,
+    image: '/images/loans/vehicle_loan.svg',
+    title: 'Drive Your Dreams: Cruising Through the World of Vehicle Loans',
+    description:
+      'Turn Your Automotive Dreams into Reality with Bank Master. Your Ultimate Guide to Vehicle Loans, unveiling strategies to make your dream vehicle a reality. Navigate Interest Rates, Terms, and Eligibility with Confidence, Accelerating Your vehicle Journey Today.',
+    features: [
+      'New & Old Vehicle Loans',
+      "8 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+  {
+    id: 6,
+    image: '/images/loans/education_loan.svg',
+    title: 'Level Up Your Skills: Navigating the World of Educational Loans',
+    description:
+      'Transform Your Academic Dreams into Reality with Bank Master. Your Definitive Guide to Educational Loans, revealing strategies to make your educational goals a reality. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Educational Journey Today.',
+    features: [
+      'New & Old Vehicle Loans',
+      "8 Banks & NBFC's Partners",
+      'Credit Facilities',
+    ],
+  },
+];
 
 const ServicesTabs = () => {
   const [openTab, setOpenTab] = useState<number>(1);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
   const activeClasses =
     'border-l border-t border-r rounded-t-lg text-white bg-secondary text-base lg:text-lg tracking-widest';
   const inactiveClasses = 'text-primary hover:text-blue-700';
 
   const handleTabChange = (tabNumber: number) => {
-    setOpenTab(tabNumber);
+    if (tabNumber !== openTab) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setOpenTab(tabNumber);
+        setIsTransitioning(false);
+      }, 100); // Transition duration should match the CSS transition duration
+    }
   };
 
   return (
     <div className='p-6 border rounded-md'>
       <ul className='flex flex-wrap justify-center md:justify-start border-b'>
-        {[
-          { id: 1, label: 'Personal Loan' },
-          { id: 2, label: 'Business Loan' },
-          { id: 3, label: 'Working Capital' },
-          { id: 4, label: 'Property Loan' },
-          { id: 5, label: 'Vehicle Loan' },
-          { id: 6, label: 'Education Loan' },
-        ].map((tab) => (
+        {tabs.map((tab) => (
           <li
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`mr-1 cursor-pointer ${
               openTab === tab.id ? '-mb-px' : ''
-            }`}
+            } transition-all duration-300 ease-in-out`}
           >
             <button
-              className={` inline-block py-2 px-4 font-semibold transition-colors ${
+              className={`inline-block py-2 px-4 font-semibold transition-colors duration-300 ease-in-out ${
                 openTab === tab.id ? activeClasses : inactiveClasses
               }`}
             >
@@ -44,91 +131,12 @@ const ServicesTabs = () => {
         ))}
       </ul>
       <div className='w-full mt-4'>
-        {[
-          {
-            id: 1,
-            image: 'images/loans/personal_loan.svg',
-            title:
-              'Unlock Financial Freedom: Navigating the World of Personal Loans',
-            description:
-              'Experience financial freedom without collateral at Bank Master. Your ultimate guide to personal loans, navigate low interest rates, terms, and eligibility confidently. Empower your financial journey today.',
-            features: [
-              'Unsecured Loans',
-              `21 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-          {
-            id: 2,
-            image: 'images/loans/business_loan.svg',
-            title:
-              'Amplify Business Prosperity: Uncover the Power of Business Loans',
-            description:
-              'Seize Financial Advantage at Bank Master, Collateral-Free. Your Ultimate Business Loan Guide. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Business Journey Today.',
-            features: [
-              'Unsecured Loans',
-              `21 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-          {
-            id: 3,
-            image: 'images/loans/working_capital.svg',
-            title:
-              'Optimize Operations: Navigating the World of Working Capital',
-            description:
-              'Enhance Financial Agility with Bank Master. Your Comprehensive Guide to Working Capital. Navigate Terms, Interest Rates, and Eligibility with Confidence. Empower Your Business Journey Today.',
-            features: [
-              'Secured & Unsecured Loans',
-              `21 Banks & NBFC's Partners`,
-              `6 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-          {
-            id: 4,
-            image: 'images/loans/property_loan.svg',
-            title:
-              'Transform Dreams into Reality: Explore the World of Property & Mortgage Loans',
-            description:
-              'Turn Your Property Dreams into Achievements with Bank Master. Your Inspirational Guide to Property & Mortgage Loans, revealing strategies to transform your aspirations into reality. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Property Journey Today.',
-            features: [
-              'Purchase & Mortgage Loans',
-              `32 Banks & NBFC's Partners`,
-              `6 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-          {
-            id: 5,
-            image: 'images/loans/vehicle_loan.svg',
-            title:
-              'Drive Your Dreams: Cruising Through the World of Vehicle Loans',
-            description:
-              'Turn Your Automotive Dreams into Reality with Bank Master. Your Ultimate Guide to Vehicle Loans, unveiling strategies to make your dream vehicle a reality. Navigate Interest Rates, Terms, and Eligibility with Confidence, Accelerating Your vehicle Journey Today.',
-            features: [
-              'New & Old Vehicle Loans',
-              `8 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-          {
-            id: 6,
-            image: 'images/loans/education_loan.svg',
-            title:
-              'Level Up Your Skills: Navigating the World of Educational Loans',
-            description:
-              'Transform Your Academic Dreams into Reality with Bank Master. Your Definitive Guide to Educational Loans, revealing strategies to make your educational goals a reality. Navigate Interest Rates, Terms, and Eligibility with Confidence. Empower Your Educational Journey Today.',
-            features: [
-              'New & Old Vehicle Loans',
-              `8 Banks & NBFC's Partners`,
-              'Credit Facilities',
-            ],
-          },
-        ].map((tabContent) => (
+        {tabContents.map((tabContent) => (
           <div
             key={tabContent.id}
-            className={`${
+            className={`transition-opacity duration-300 ease-in-out ${
+              isTransitioning ? 'opacity-0' : 'opacity-100'
+            } ${
               openTab === tabContent.id ? 'block' : 'hidden'
             } flex flex-col md:flex-row items-center`}
           >
@@ -137,7 +145,7 @@ const ServicesTabs = () => {
                 src={tabContent.image}
                 width={500}
                 height={500}
-                alt='loan-image'
+                alt={tabContent.title}
                 loading='lazy'
               />
             </div>
