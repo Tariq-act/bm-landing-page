@@ -28,6 +28,7 @@ const Enquiry = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [showRequiredFieldsAlert, setShowRequiredFieldsAlert] = useState(false);
+  const [mobileError, setMobileError] = useState('');
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -78,24 +79,38 @@ const Enquiry = () => {
       submitForm();
     } else {
       setShowRequiredFieldsAlert(true);
-      setTimeout(() => {
-        setShowRequiredFieldsAlert(false);
-      }, 5000);
     }
   };
 
   const validateForm = () => {
     const mobileRegex = /^\d{10}$/;
 
-    return (
-      formData.name !== '' &&
-      formData.mobile.match(mobileRegex) && // Check if mobile matches the regex
-      formData.loanType !== '' &&
-      formData.loanAmount !== ''
-    );
+    if (!formData.name || !formData.loanType || !formData.loanAmount) {
+      setMobileError('');
+      setShowRequiredFieldsAlert(true);
+      return false;
+    }
+
+    if (!formData.mobile.match(mobileRegex)) {
+      setMobileError('Mobile number must be exactly 10 digits long.');
+      return false;
+    }
+
+    setMobileError('');
+    setShowRequiredFieldsAlert(false);
+    return true;
   };
 
-  // Effect to change the image every 5 seconds
+  useEffect(() => {
+    if (mobileError || showRequiredFieldsAlert) {
+      const timer = setTimeout(() => {
+        setMobileError('');
+        setShowRequiredFieldsAlert(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [mobileError, showRequiredFieldsAlert]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex: number) =>
@@ -252,9 +267,14 @@ const Enquiry = () => {
                     onChange={handleChange}
                   />
                 </div>
+                {mobileError && (
+                  <div className='text-red-500 mt-2 text-center'>
+                    {mobileError}
+                  </div>
+                )}
                 {showRequiredFieldsAlert && (
                   <div className='text-red-500 mt-2 text-center'>
-                    Please fill out all required fields.
+                    Please fill out all required and valid fields.
                   </div>
                 )}
                 <div className='w-full mt-6 flex justify-center'>
