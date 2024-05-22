@@ -291,6 +291,7 @@ const JobApplication: React.FC = () => {
               className='hidden'
               ref={fileInputRef}
               onChange={handleFileChange}
+              accept='.doc, .docx, .pdf, .odt, .rtf'
               required
             />
             <p className='text-center mt-2'>
