@@ -131,11 +131,11 @@ const JobApplication: React.FC = () => {
             </div>
 
             <div className='flex flex-col gap-1'>
-              <label htmlFor='E mail' className='text-gray-500 text-sm'>
+              <label htmlFor='email' className='text-gray-500 text-sm'>
                 E Mail<span className='text-red-500'>*</span>
               </label>
               <input
-                id='E mail'
+                id='email'
                 type='email'
                 className='p-1 border rounded focus:outline-primary focus:outline-double'
                 value={form.email}
@@ -166,8 +166,8 @@ const JobApplication: React.FC = () => {
                 Year Of Graduation<span className='text-red-500'>*</span>
               </label>
               <input
-                id='YearOfGraduation'
-                type='text'
+                id='graduationYear'
+                type='number'
                 className='p-1 border rounded focus:outline-primary focus:outline-double'
                 value={form.graduationYear}
                 onChange={handleChange}
@@ -233,12 +233,12 @@ const JobApplication: React.FC = () => {
               />
             </div>
             <div className='flex flex-col gap-1'>
-              <label htmlFor='Vacancy' className='text-gray-500 text-sm'>
+              <label htmlFor='howDidYouFind' className='text-gray-500 text-sm'>
                 How did you come Across this Vacancy*
                 <span className='text-red-500'>*</span>
               </label>
               <input
-                id='Vacancy'
+                id='howDidYouFind'
                 type='text'
                 className='p-1 border rounded focus:outline-primary focus:outline-double'
                 value={form.howDidYouFind}
@@ -291,8 +291,8 @@ const JobApplication: React.FC = () => {
               className='hidden'
               ref={fileInputRef}
               onChange={handleFileChange}
+              required
             />
-            required
             <p className='text-center mt-2'>
               <span className='text-primary mr-2'>Upload Your Resume</span>
               or Drag and drop your resume here, or{' '}
