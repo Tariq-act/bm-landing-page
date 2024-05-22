@@ -280,11 +280,11 @@ const JobApplication: React.FC = () => {
           </div>
 
           <div
-            className='col-md-12 mb-3 border-2 border-dashed my-2 rounded-lg p-3'
+            className='col-md-12 mb-3 border-2 border-dashed my-2 rounded-lg p-3 bg-[#F4F6FD]'
             onClick={handleBoxClick}
           >
             <div className='flex justify-center cursor-pointer'>
-              <UploadSharp />
+              <UploadSharp className='text-primary' />
             </div>
             <input
               type='file'
