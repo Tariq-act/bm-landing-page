@@ -48,7 +48,7 @@ const OurUsps = () => {
       setTimeout(() => {
         setSelectedFeature(index);
         setIsTransitioning(false);
-      }, 500);
+      }, 200);
     }
   };
 
