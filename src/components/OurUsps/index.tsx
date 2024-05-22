@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const OurUsps = () => {
   const [selectedFeature, setSelectedFeature] = useState<number>(0);
   const images = [
-    'images/feature/tracker.svg',
+    'images/feature/loanProcess.svg',
     'images/feature/financialDoctor.svg',
     'images/feature/tracker.svg',
     'images/feature/driveInn.svg',
