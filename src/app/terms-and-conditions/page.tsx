@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
       <div className='p-2 md:p-10'>
         <div className='flex items-end justify-center text-center text-primary font-bold text-2xl md:text-3xl '>
           <Image src='/images/logo.svg' width={50} height={50} alt='logo' />
-          <h2 className=''>TERMS OF SERVICE AGREEMENT</h2>
+          <h2 className='text-lg md:text-2xl'>TERMS OF SERVICE AGREEMENT</h2>
         </div>
         <div className='prose md:prose-lg mt-5 px-10 md:px-16 '>
           <p className='text-black'>
@@ -141,7 +141,7 @@ const TermsAndConditions = () => {
             </p>
           </div>
 
-          <h3 className='mb-3 font-bold text-2xl text-black'>
+          <h3 className='my-3 font-bold text-2xl text-black'>
             3. DISCLAIMER OF WARRANTIES
           </h3>
           <p>
@@ -181,7 +181,7 @@ const TermsAndConditions = () => {
             SO SOME OF THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU.
           </p>
 
-          <h3 className='mb-3 font-bold text-2xl text-black'>
+          <h3 className='my-3 font-bold text-2xl text-black'>
             4. LIMITATION OF LIABILITY
           </h3>
           <div className='flex flex-col gap-4 my-3'>

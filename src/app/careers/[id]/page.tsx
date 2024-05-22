@@ -65,7 +65,7 @@ const JobApplication: React.FC = () => {
   };
 
   return (
-    <div className='shadow p-4 py-8 m-4 w-11/12 md:w-4/5  lg:w-3/5 mx-auto rounded-lg'>
+    <div className='shadow p-4 py-4 md:py-8 m-4 w-11/12 md:w-4/5  lg:w-3/5 mx-auto rounded-lg'>
       <h1 className='text-2xl text-primary font-semibold my-4'>
         Job Description
       </h1>
