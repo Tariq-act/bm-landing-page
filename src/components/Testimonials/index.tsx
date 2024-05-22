@@ -4,9 +4,7 @@ import TestimonialCard from './TestimonialCard';
 import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
-
-SwiperCore.use([Autoplay, Pagination, EffectFade]);
+import { Autoplay, Pagination } from 'swiper/modules';
 
 const data = [
   {
@@ -78,11 +76,28 @@ const Testimonials = () => {
       </div>
       <div style={{ padding: '3rem' }}>
         <Swiper
-          effect='fade'
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+            },
+            640: {
+              slidesPerView: 1,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
           spaceBetween={30}
-          slidesPerView={1}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000 }}
+          pagination={{
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 2500,
+          }}
+          modules={[Autoplay, Pagination]}
           className='mySwiper'
         >
           {data.map((client, idx) => (
