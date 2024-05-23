@@ -13,6 +13,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
+  const [isOpenTab, setIsOpenTabs] = useState<number>(1);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +35,10 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handChangeTabs = (index: number) => {
+    setIsOpenTabs(index);
+  };
+
   return (
     <main>
       <Navbar />
@@ -41,10 +46,10 @@ export default function Home() {
       <AboutSection />
       <LeadingImpact />
       <OurUsps />
-      <OurServices />
+      <OurServices activeTab={isOpenTab} handleServiceTabs={handChangeTabs} />
       <Collaborators />
       <Testimonials />
-      <Footer />
+      <Footer handleServiceTabs={handChangeTabs} />
 
       <button
         onClick={handleScrollToTop}

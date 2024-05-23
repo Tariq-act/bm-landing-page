@@ -1,7 +1,13 @@
 import React from 'react';
 import ServicesTabs from './ServicesTabs';
 
-const OurServices = () => {
+const OurServices = ({
+  activeTab,
+  handleServiceTabs,
+}: {
+  activeTab: number;
+  handleServiceTabs: (index: number) => void;
+}) => {
   return (
     <div id='our-services' className='mt-10 md:mt-20 flex flex-col gap-10'>
       <div className='flex flex-col items-center justify-center'>
@@ -18,7 +24,10 @@ const OurServices = () => {
         </div>
       </div>
       <div className='mx-4 lg:mx-10 xl:mx-24'>
-        <ServicesTabs />
+        <ServicesTabs
+          activeTab={activeTab}
+          handleServiceTabs={handleServiceTabs}
+        />
       </div>
     </div>
   );

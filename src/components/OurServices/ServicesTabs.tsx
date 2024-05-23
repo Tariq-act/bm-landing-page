@@ -91,8 +91,14 @@ const tabContents = [
   },
 ];
 
-const ServicesTabs = () => {
-  const [openTab, setOpenTab] = useState<number>(1);
+const ServicesTabs = ({
+  activeTab,
+  handleServiceTabs,
+}: {
+  activeTab: number;
+  handleServiceTabs: (index: number) => void;
+}) => {
+  // const [openTab, setOpenTab] = useState<number>(1);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
   const activeClasses =
@@ -100,10 +106,10 @@ const ServicesTabs = () => {
   const inactiveClasses = 'text-primary hover:text-blue-700';
 
   const handleTabChange = (tabNumber: number) => {
-    if (tabNumber !== openTab) {
+    if (tabNumber !== activeTab) {
       setIsTransitioning(true);
       setTimeout(() => {
-        setOpenTab(tabNumber);
+        handleServiceTabs(tabNumber);
         setIsTransitioning(false);
       }, 100); // Transition duration should match the CSS transition duration
     }
@@ -117,12 +123,12 @@ const ServicesTabs = () => {
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`mr-1 cursor-pointer ${
-              openTab === tab.id ? '-mb-px' : ''
+              activeTab === tab.id ? '-mb-px' : ''
             } transition-all duration-300 ease-in-out`}
           >
             <button
               className={`inline-block py-2 px-4 font-semibold transition-colors duration-300 ease-in-out ${
-                openTab === tab.id ? activeClasses : inactiveClasses
+                activeTab === tab.id ? activeClasses : inactiveClasses
               }`}
             >
               {tab.label}
@@ -137,7 +143,7 @@ const ServicesTabs = () => {
             className={`transition-opacity duration-300 ease-in-out ${
               isTransitioning ? 'opacity-0' : 'opacity-100'
             } ${
-              openTab === tabContent.id ? 'block' : 'hidden'
+              activeTab === tabContent.id ? 'block' : 'hidden'
             } flex flex-col md:flex-row items-center`}
           >
             <div className='flex-1 lg:flex-auto'>
