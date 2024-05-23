@@ -1,5 +1,6 @@
 'use client';
 
+import { useTabs } from '@/context';
 import { Check } from '@mui/icons-material';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -91,14 +92,9 @@ const tabContents = [
   },
 ];
 
-const ServicesTabs = ({
-  activeTab,
-  handleServiceTabs,
-}: {
-  activeTab: number;
-  handleServiceTabs: (index: number) => void;
-}) => {
+const ServicesTabs = () => {
   // const [openTab, setOpenTab] = useState<number>(1);
+  const { openTab, setOpenTab } = useTabs();
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
   const activeClasses =
@@ -106,10 +102,10 @@ const ServicesTabs = ({
   const inactiveClasses = 'text-primary hover:text-blue-700';
 
   const handleTabChange = (tabNumber: number) => {
-    if (tabNumber !== activeTab) {
+    if (tabNumber !== openTab) {
       setIsTransitioning(true);
       setTimeout(() => {
-        handleServiceTabs(tabNumber);
+        setOpenTab(tabNumber);
         setIsTransitioning(false);
       }, 100); // Transition duration should match the CSS transition duration
     }
@@ -123,12 +119,12 @@ const ServicesTabs = ({
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`mr-1 cursor-pointer ${
-              activeTab === tab.id ? '-mb-px' : ''
+              openTab === tab.id ? '-mb-px' : ''
             } transition-all duration-300 ease-in-out`}
           >
             <button
               className={`inline-block py-2 px-4 font-semibold transition-colors duration-300 ease-in-out ${
-                activeTab === tab.id ? activeClasses : inactiveClasses
+                openTab === tab.id ? activeClasses : inactiveClasses
               }`}
             >
               {tab.label}
@@ -143,7 +139,7 @@ const ServicesTabs = ({
             className={`transition-opacity duration-300 ease-in-out ${
               isTransitioning ? 'opacity-0' : 'opacity-100'
             } ${
-              activeTab === tabContent.id ? 'block' : 'hidden'
+              openTab === tabContent.id ? 'block' : 'hidden'
             } flex flex-col md:flex-row items-center`}
           >
             <div className='flex-1 lg:flex-auto'>
