@@ -14,7 +14,7 @@ interface FormData {
 const Footer = ({
   handleServiceTabs,
 }: {
-  handleServiceTabs: (index: number) => void;
+  handleServiceTabs?: (index: number) => void;
 }) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -132,7 +132,7 @@ const Footer = ({
           <div className='flex flex-col items-start justify-center'>
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Services</h4>
             <ul>
-              <li onClick={() => handleServiceTabs(1)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(1)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
@@ -140,7 +140,7 @@ const Footer = ({
                   <KeyboardArrowRight /> <span>Personal Loan</span>
                 </Link>
               </li>
-              <li onClick={() => handleServiceTabs(2)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(2)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
@@ -148,7 +148,7 @@ const Footer = ({
                   <KeyboardArrowRight /> <span>Business Loan</span>
                 </Link>
               </li>
-              <li onClick={() => handleServiceTabs(3)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(3)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
@@ -156,7 +156,7 @@ const Footer = ({
                   <KeyboardArrowRight /> <span>Working capital</span>
                 </Link>
               </li>
-              <li onClick={() => handleServiceTabs(4)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(4)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
@@ -164,7 +164,7 @@ const Footer = ({
                   <KeyboardArrowRight /> <span>Property Loan</span>
                 </Link>
               </li>
-              <li onClick={() => handleServiceTabs(5)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(5)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
@@ -172,7 +172,7 @@ const Footer = ({
                   <KeyboardArrowRight /> <span>Vehicle Loan</span>
                 </Link>
               </li>
-              <li onClick={() => handleServiceTabs(6)}>
+              <li onClick={() => handleServiceTabs && handleServiceTabs(6)}>
                 <Link
                   href='/#our-services'
                   className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
