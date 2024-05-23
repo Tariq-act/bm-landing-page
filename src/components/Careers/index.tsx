@@ -14,7 +14,7 @@ const jobs = [
   },
   {
     id: 2,
-    title: 'Operations Executive',
+    title: 'Technical Lead',
     jobID: '20035567',
     location: 'Hyderabad',
     posted: '21/04/2024',
@@ -22,7 +22,7 @@ const jobs = [
   },
   {
     id: 3,
-    title: 'Operations Executive',
+    title: 'HR Intern (2)',
     jobID: '20035568',
     location: 'Hyderabad',
     posted: '21/04/2024',
@@ -30,7 +30,7 @@ const jobs = [
   },
   {
     id: 4,
-    title: 'Operations Executive',
+    title: 'Flutter Developer',
     jobID: '20035569',
     location: 'Hyderabad',
     posted: '21/04/2024',
@@ -38,7 +38,7 @@ const jobs = [
   },
   {
     id: 5,
-    title: 'Operations Executive',
+    title: 'Technical Lead',
     jobID: '20035569',
     location: 'Hyderabad',
     posted: '21/04/2024',
@@ -46,7 +46,7 @@ const jobs = [
   },
   {
     id: 6,
-    title: 'Operations Executive',
+    title: 'Operations Manager',
     jobID: '20035569',
     location: 'Hyderabad',
     posted: '21/04/2024',
@@ -54,13 +54,12 @@ const jobs = [
   },
   {
     id: 7,
-    title: 'Operations Executive',
+    title: 'Technical Lead',
     jobID: '20035569',
     location: 'Hyderabad',
     posted: '21/04/2024',
     experience: '1-3 Years',
   },
-  // Add more job objects as needed
 ];
 
 const ITEMS_PER_PAGE = 5;

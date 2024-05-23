@@ -240,7 +240,6 @@ const Enquiry = () => {
                   <SelectInput
                     icon={House}
                     className=' w-full max-w-xs'
-                    defaultValue=''
                     required
                     name='loanType'
                     value={formData.loanType}
