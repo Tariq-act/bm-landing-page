@@ -85,31 +85,30 @@ const Careers = () => {
   };
 
   return (
-    <div>
+    <div className='container mx-auto py-4 md:py-8'>
       <div className='grid grid-cols-1 gap-4 border shadow-md rounded-lg'>
         {getPaginatedJobs().map((item) => (
-          <div key={item.id} className='border-b '>
-            <div className='p-6 flex flex-col md:items-center md:flex-row gap-3 md:justify-evenly'>
+          <div key={item.id} className='border-b'>
+            <div className='p-6 grid grid-cols-1 md:grid-cols-5 md:items-center gap-3'>
               <div>
                 <h3 className='text-primary font-semibold'>{item.title}</h3>
                 <p className='text-[#76767E] text-xs font-semibold'>
-                  {' '}
                   Job ID: {item.jobID}
                 </p>
               </div>
               <div>
                 <h3 className='text-[#76767E] text-xs'>Location</h3>
-                <p> {item.location}</p>
+                <p>{item.location}</p>
               </div>
               <div>
                 <h3 className='text-[#76767E] text-xs'>Posted</h3>
-                <p> {item.posted}</p>
+                <p>{item.posted}</p>
               </div>
               <div>
                 <h3 className='text-[#76767E] text-xs'>Experience</h3>
-                <p> {item.experience}</p>
+                <p>{item.experience}</p>
               </div>
-              <div>
+              <div className='flex md:justify-center'>
                 <Link href={`/careers/${item.jobID}`}>
                   <button className='bg-primary p-1 px-4 text-white rounded-full'>
                     Apply
@@ -120,11 +119,13 @@ const Careers = () => {
           </div>
         ))}
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      <div className='flex justify-center mt-4'>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };
