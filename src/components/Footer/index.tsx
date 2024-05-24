@@ -24,6 +24,7 @@ const Footer = () => {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [showRequiredFieldsAlert, setShowRequiredFieldsAlert] = useState(false);
+  const [mobileError, setMobileError] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -82,12 +83,17 @@ const Footer = () => {
     const mobileRegex = /^\d{10}$/;
 
     // Check if mobile matches the regex
-    const isMobileValid =
-      formData.mobile !== null && formData.mobile.match(mobileRegex);
+    const isMobileValid = mobileRegex.test(formData.mobile);
+
+    if (!isMobileValid) {
+      setMobileError('Mobile number must be exactly 10 digits');
+    } else {
+      setMobileError('');
+    }
 
     return (
       formData.name !== '' &&
-      !!isMobileValid && // !! is used to explicitly convert isMobileValid to boolean
+      isMobileValid && // isMobileValid is a boolean now
       formData.email !== '' &&
       formData.message !== ''
     );
@@ -250,7 +256,7 @@ const Footer = () => {
                 required
               />
               <input
-                type='tel'
+                type='number'
                 className='p-1 px-4 rounded-lg text-black'
                 placeholder='Phone Number'
                 name='mobile'
@@ -258,6 +264,9 @@ const Footer = () => {
                 onChange={handleChange}
                 required
               />
+              {mobileError && (
+                <span className='text-red-500 ml-2'>{mobileError}</span>
+              )}
               <input
                 type='email'
                 className='p-1 px-4 rounded-lg text-black'
@@ -290,6 +299,11 @@ const Footer = () => {
                   </span>
                 )}
               </div>
+              {successMsg && (
+                <span className='text-green-600'>
+                  Form Submitted Successfully.
+                </span>
+              )}
             </form>
           </div>
         </div>
