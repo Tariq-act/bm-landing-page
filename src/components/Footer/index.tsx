@@ -20,7 +20,6 @@ const Footer = () => {
     email: '',
     message: '',
   });
-
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [showRequiredFieldsAlert, setShowRequiredFieldsAlert] = useState(false);
@@ -30,46 +29,32 @@ const Footer = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-
-    // Validate the form
     if (!validateForm()) {
       setShowRequiredFieldsAlert(true);
-      setTimeout(() => {
-        setShowRequiredFieldsAlert(false);
-      }, 5000); // Hide the alert after 5 seconds
+      setTimeout(() => setShowRequiredFieldsAlert(false), 5000);
       return;
     }
-
     setLoading(true);
-
     try {
-      const scriptURL =
-        'https://script.google.com/macros/s/AKfycbzJ18kh_K5K5DpL3K7tIDeQXlDyh3N7o3R8DNzVPijwHJ1L5NNBLLsFAIELd2O5-riEwA/exec';
-
-      const response = await fetch(scriptURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-        mode: 'no-cors',
-      });
-
-      const data = await response.text();
+      const response = await fetch(
+        'https://script.google.com/macros/s/AKfycbzJ18kh_K5K5DpL3K7tIDeQXlDyh3N7o3R8DNzVPijwHJ1L5NNBLLsFAIELd2O5-riEwA/exec',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+          mode: 'no-cors',
+        }
+      );
+      await response.text();
       setSuccessMsg('Form submitted successfully');
-      setFormData({
-        name: '',
-        mobile: '',
-        email: '',
-        message: '',
-      });
+      setFormData({ name: '', mobile: '', email: '', message: '' });
     } catch (error) {
       console.error('Error:', error);
       alert('Form submission failed');
@@ -79,25 +64,31 @@ const Footer = () => {
   };
 
   const validateForm = (): boolean => {
-    // Regular expression to match exactly 10 digits for mobile number
     const mobileRegex = /^\d{10}$/;
-
-    // Check if mobile matches the regex
     const isMobileValid = mobileRegex.test(formData.mobile);
-
-    if (!isMobileValid) {
-      setMobileError('Mobile number must be exactly 10 digits');
-    } else {
-      setMobileError('');
-    }
-
-    return (
-      formData.name !== '' &&
-      isMobileValid && // isMobileValid is a boolean now
-      formData.email !== '' &&
-      formData.message !== ''
+    setMobileError(
+      isMobileValid ? '' : 'Mobile number must be exactly 10 digits'
     );
+
+    const isNameValid = formData.name.trim() !== '';
+    const isEmailValid = formData.email.trim() !== '';
+    const isMessageValid = formData.message.trim() !== '';
+
+    return isNameValid && isMobileValid && isEmailValid && isMessageValid;
   };
+  const renderLinks = (
+    links: { href: string; label: string; tab?: number }[]
+  ) =>
+    links.map(({ href, label, tab }) => (
+      <li key={label} onClick={() => tab && setOpenTab(tab)}>
+        <Link
+          href={href}
+          className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
+        >
+          <KeyboardArrowRight /> <span>{label}</span>
+        </Link>
+      </li>
+    ));
 
   return (
     <div className='text-white relative' id='footer'>
@@ -108,135 +99,40 @@ const Footer = () => {
               Eligibility Tool
             </h2>
             <p className='ml-2 text-[#dfe4fd]'>
-              Add power to your loan selection by our
+              Add power to your loan selection by our{' '}
               <span className='uppercase'>loan eligibility master tool.</span>
             </p>
-
             <ul className='text-[#dfe4fd]'>
-              <li>
-                <KeyboardArrowRight />{' '}
-                <Link
-                  href={'/terms-and-conditions'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  Terms & conditions
-                </Link>
-              </li>
-              <li>
-                <KeyboardArrowRight />{' '}
-                <Link
-                  href={'/privacy-policy'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  Privacy & policy
-                </Link>
-              </li>
+              {renderLinks([
+                { href: '/terms-and-conditions', label: 'Terms & conditions' },
+                { href: '/privacy-policy', label: 'Privacy & policy' },
+              ])}
             </ul>
           </div>
           <div className='flex flex-col items-start justify-center'>
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Services</h4>
             <ul>
-              <li onClick={() => setOpenTab(1)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Personal Loan</span>
-                </Link>
-              </li>
-              <li onClick={() => setOpenTab(2)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Business Loan</span>
-                </Link>
-              </li>
-              <li onClick={() => setOpenTab(3)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Working capital</span>
-                </Link>
-              </li>
-              <li onClick={() => setOpenTab(4)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Property Loan</span>
-                </Link>
-              </li>
-              <li onClick={() => setOpenTab(5)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Vehicle Loan</span>
-                </Link>
-              </li>
-              <li onClick={() => setOpenTab(6)}>
-                <Link
-                  href='/#our-services'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Education Loan</span>
-                </Link>
-              </li>
+              {renderLinks([
+                { href: '/#our-services', label: 'Personal Loan', tab: 1 },
+                { href: '/#our-services', label: 'Business Loan', tab: 2 },
+                { href: '/#our-services', label: 'Working capital', tab: 3 },
+                { href: '/#our-services', label: 'Property Loan', tab: 4 },
+                { href: '/#our-services', label: 'Vehicle Loan', tab: 5 },
+                { href: '/#our-services', label: 'Education Loan', tab: 6 },
+              ])}
             </ul>
           </div>
           <div>
             <h4 className='ml-2 mb-2 md:mb-4 text-lg font-bold'>Quick Links</h4>
             <ul>
-              <li>
-                <Link
-                  href='/#home'
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={'/careers'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Careers</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={'#footer'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Eligibility</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={'/#collaborators'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Team</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={'/#about'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>About Us</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={'#footer'}
-                  className='transition-all duration-300 hover:text-secondary hover:tracking-wider hover:scale-105'
-                >
-                  <KeyboardArrowRight /> <span>Contact Us</span>
-                </Link>
-              </li>
+              {renderLinks([
+                { href: '/#home', label: 'Home' },
+                { href: '/careers', label: 'Careers' },
+                { href: '#footer', label: 'Eligibility' },
+                { href: '/#collaborators', label: 'Team' },
+                { href: '/#about', label: 'About Us' },
+                { href: '#footer', label: 'Contact Us' },
+              ])}
             </ul>
           </div>
           <div>
@@ -284,20 +180,20 @@ const Footer = () => {
                 onChange={handleChange}
                 required
               />
+              {showRequiredFieldsAlert && (
+                <span className='text-red-500 ml-2'>
+                  Please fill out all required and valid fields.
+                </span>
+              )}
               <div className='flex items-center'>
                 <button
                   type='submit'
-                  className='bg-secondary w-full md:w-auto rounded-md p-2 md:p-1 px-2 text-white'
+                  className='bg-secondary w-full md:w-auto rounded-md p-2 md:p-2 px-2 text-white'
                   id='contact-form-button'
                   disabled={loading}
                 >
                   {loading ? 'Loading...' : 'Submit'}
                 </button>
-                {showRequiredFieldsAlert && (
-                  <span className='text-red-500 ml-2'>
-                    Please fill out all required fields.
-                  </span>
-                )}
               </div>
               {successMsg && (
                 <span className='text-green-600'>
@@ -309,8 +205,7 @@ const Footer = () => {
         </div>
         <SocialLinks />
       </div>
-
-      <div className='flex flex-col md:flex-row items-center justify-between p-4 py-6 md:px-28 bg-[#000b1c]  '>
+      <div className='flex flex-col md:flex-row items-center justify-between p-4 py-6 md:px-28 bg-[#000b1c]'>
         <h2 className='text-center text-md-start mb-3 mb-md-0'>
           &copy; <a href='#'>Bank Master</a>, All Right Reserved.
         </h2>
