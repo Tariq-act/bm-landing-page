@@ -10,6 +10,7 @@ import OurUsps from '@/components/OurUsps';
 import { ArrowUpward } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
+import MyNexus from '@/components/MyNexus';
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
@@ -43,6 +44,7 @@ export default function Home() {
       <OurUsps />
       <OurServices />
       <Collaborators />
+      <MyNexus />
       <Testimonials />
       <Footer />
 
